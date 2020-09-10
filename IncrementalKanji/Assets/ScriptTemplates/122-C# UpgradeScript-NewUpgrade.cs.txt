@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+using static UsefulMethod;
+
+public class #SCRIPTNAME# : UPGRADE {
+
+	//1. saveRにsampleVariable(名前は自分で決める)をpublic int で宣言する。
+	//2. get, setに下記のように書く。
+	
+	//こうすることで、levelが自動的にセーブされるようになります。
+	    public override int level
+    {
+        get { return Main.SR.sampleVariable; }
+        set { Main.SR.sampleVariable = value; }
+    }
+
+	//calcurateの引数に、アップグレードによって減らす変数を参照渡しで指定します。
+
+	    public override void upgrade()
+    {
+        calcurate(ref Main.SR.money);
+    }
+
+	//引数にそれぞれアップグレードの関数を指定します。
+	
+	//第1引数・・・アップグレードの初期値を指定します。
+	//第2引数・・・アップグレードの初期コストを指定します。
+	//第3引数・・・アップグレードによる増分を指定します。
+	//第4引数・・・指数関数の底を指定します。
+
+	void Awake () {
+		startUpgrade(0.2, 20, 0.3, 1.05);
+	}
+	
+	//アップグレードのコストが足りなかったら、ボタンを押せないようにする処理です。
+	//calcurateと同じ変数を指定します。
+
+	// Update is called once per frame
+	void Update () {
+		checkButton(Main.SR.money);
+	}
+}

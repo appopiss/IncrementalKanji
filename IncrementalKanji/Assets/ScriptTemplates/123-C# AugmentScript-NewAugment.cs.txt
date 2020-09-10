@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using static UsefulMethod;
+
+public class #SCRIPTNAME# : AUGMENT
+{
+    public override bool isGet { get { return Main.SR; } set { Main.SR = value; } }
+    public override void upgrade()
+    {
+        get(ref Main.SR);
+    }
+    public override bool unlock()
+    {
+        if(jouken)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public override void effect()
+    {
+        main.syurui[0].GetComponent<UPGRADE>().Aug1 = jousouryou;
+    }
+    // Start is called before the first frame update
+    void Awake()
+    {
+        startAug();
+        name = "";
+        explain = "";
+        condition = "";
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        gold = tDigit();
+        wood = "0";
+        food = "0";
+        checkButton(Main.SR);
+        update();
+            }
+}
